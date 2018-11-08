@@ -23,3 +23,6 @@ Click [here](https://github.com/nabendu82/exchange-rates/archive/master.zip) the
 > npm install
 > npm start
 ```
+
+#### Heroku Deployment
+The project is deployed in Heroku. Click [here](https://fierce-sands-41839.herokuapp.com/)
