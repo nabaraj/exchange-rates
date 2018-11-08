@@ -8,7 +8,7 @@ class SocialLink extends Component {
         <div>
             <a
                 href={ href }
-                activeStyle={ { borderBottom: '4px solid #008dc8' } }
+                activestyle={ { borderBottom: '4px solid #008dc8' } }
                 style={ { marginRight: '6px' } }
                 target="_blank"
                 rel="noopener noreferrer"

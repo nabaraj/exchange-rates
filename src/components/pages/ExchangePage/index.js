@@ -5,7 +5,8 @@ import { HeaderText } from '../../molecules/StyledComponents';
 import TableHeader from '../../molecules/TableHeader';
 import TableRow from '../../molecules/TableRow';
 
-const desiredCurr = [ "CAD", "JPY", "GBP", "USD", "EUR", "MXN", "AUD", "ZAR", "NZD", "RUB", "CHF" ];
+const desiredCurr = ["CAD", "JPY", "GBP", "USD", "EUR", "MXN", "AUD", "ZAR", "NZD", "RUB", "CHF"];
+const desiredCurrwFlags = [ "CAD 🇨🇦", "JPY 🇯🇵", "GBP 🇬🇧", "USD 🇺🇸", "EUR 🇪🇺", "MXN 🇲🇽", "AUD 🇦🇺", "ZAR 🇿🇦", "NZD 🇳🇿", "RUB 🇷🇺", "CHF 🇨🇭" ];
 
 class ExchangePage extends Component {
     constructor(props) {
@@ -18,6 +19,11 @@ class ExchangePage extends Component {
             eurExchangeData : [],
             chfExchangeData : [],
             rubExchangeData : [],
+            jpyExchangeData : [],
+            audExchangeData : [],
+            nzdExchangeData : [],
+            zarExchangeData : [],
+            inrExchangeData : [],
 
         }
         this.getExchangeData();
@@ -59,34 +65,59 @@ class ExchangePage extends Component {
                 rubExchangeData: desiredCurr.map(item => {return nextProps.rubExcRateData[item];})
             });
         }
+        if (this.props.jpyExcRateData !== nextProps.jpyExcRateData) {
+            this.setState({
+                jpyExchangeData: desiredCurr.map(item => {return nextProps.jpyExcRateData[item];})
+            });
+        }
+        if (this.props.audExcRateData !== nextProps.audExcRateData) {
+            this.setState({
+                audExchangeData: desiredCurr.map(item => {return nextProps.audExcRateData[item];}),
+            });
+        }
+        if (this.props.nzdExcRateData !== nextProps.nzdExcRateData) {
+            this.setState({
+                nzdExchangeData: desiredCurr.map(item => {return nextProps.nzdExcRateData[item];})
+            });
+        }
+        if (this.props.zarExcRateData !== nextProps.zarExcRateData) {
+            this.setState({
+                zarExchangeData: desiredCurr.map(item => {return nextProps.zarExcRateData[item];})
+            });
+        }
+        if (this.props.inrExcRateData !== nextProps.inrExcRateData) {
+            this.setState({
+                inrExchangeData: desiredCurr.map(item => {return nextProps.inrExcRateData[item];})
+            });
+        }
 
     }
 
 
     getExchangeData() {
-        console.log('Inside getExchangeData ');
         this.props.init();
     }
     render() {
-        if(this.state.usExchangeData) {
-            console.log('this.state.usExchangeData ', this.state.usExchangeData);
-        }
         return (
             <Fragment>
                 <HeaderText>
                     Live Exchange Rates
                     </HeaderText>
                 <table>
-                    <thead><TableHeader headerData={desiredCurr} /></thead>
+                    <thead><TableHeader headerData={desiredCurrwFlags} /></thead>
                     <tbody>
-                        {this.state.usExchangeData && <TableRow forCountry="USD" exchData={this.state.usExchangeData} />}
-                        {this.state.cadExchangeData && <TableRow forCountry="CAD" exchData={this.state.cadExchangeData} />}
-                        {this.state.mxnExchangeData && <TableRow forCountry="MXN" exchData={this.state.mxnExchangeData} />}
-                        {this.state.gbpExchangeData && <TableRow forCountry="GBP" exchData={this.state.gbpExchangeData} />}
-                        {this.state.eurExchangeData && <TableRow forCountry="EUR" exchData={this.state.eurExchangeData} />}
-                        {this.state.chfExchangeData && <TableRow forCountry="CHF" exchData={this.state.chfExchangeData} />}
-                        {this.state.rubExchangeData && <TableRow forCountry="RUB" exchData={this.state.rubExchangeData} />}
-                   
+                        {this.state.usExchangeData && <TableRow forCountry="USD 🇺🇸" exchData={this.state.usExchangeData} />}
+                        {this.state.cadExchangeData && <TableRow forCountry="CAD 🇨🇦" exchData={this.state.cadExchangeData} />}
+                        {this.state.mxnExchangeData && <TableRow forCountry="MXN 🇲🇽" exchData={this.state.mxnExchangeData} />}
+                        {this.state.gbpExchangeData && <TableRow forCountry="GBP 🇬🇧" exchData={this.state.gbpExchangeData} />}
+                        {this.state.eurExchangeData && <TableRow forCountry="EUR 🇪🇺" exchData={this.state.eurExchangeData} />}
+                        {this.state.chfExchangeData && <TableRow forCountry="CHF 🇨🇭" exchData={this.state.chfExchangeData} />}
+                        {this.state.rubExchangeData && <TableRow forCountry="RUB 🇷🇺" exchData={this.state.rubExchangeData} />}
+                        {this.state.jpyExchangeData && <TableRow forCountry="JPY 🇯🇵" exchData={this.state.jpyExchangeData} />}
+                        {this.state.audExchangeData && <TableRow forCountry="AUD 🇦🇺" exchData={this.state.audExchangeData} />}
+                        {this.state.nzdExchangeData && <TableRow forCountry="NZD 🇳🇿" exchData={this.state.nzdExchangeData} />}
+                        {this.state.zarExchangeData && <TableRow forCountry="ZAR 🇿🇦" exchData={this.state.zarExchangeData} />}
+                        {this.state.inrExchangeData && <TableRow forCountry="INR 🇮🇳" exchData={this.state.inrExchangeData} />}                   
                     </tbody>
                 </table>
             </Fragment>
@@ -101,7 +132,12 @@ const mapStateToProps = ({ exchangeReducer }) => ({
     gbpExcRateData: exchangeReducer.gbpExcRateData,
     eurExcRateData: exchangeReducer.eurExcRateData,
     chfExcRateData: exchangeReducer.chfExcRateData,
-    rubExcRateData: exchangeReducer.rubExcRateData
+    rubExcRateData: exchangeReducer.rubExcRateData,
+    jpyExcRateData: exchangeReducer.jpyExcRateData,
+    audExcRateData: exchangeReducer.audExcRateData,
+    nzdExcRateData: exchangeReducer.nzdExcRateData,
+    zarExcRateData: exchangeReducer.zarExcRateData,
+    inrExcRateData: exchangeReducer.inrExcRateData,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -113,6 +149,11 @@ const mapDispatchToProps = dispatch => ({
         dispatch(exchangeAction.getEURrates());
         dispatch(exchangeAction.getCHFrates());
         dispatch(exchangeAction.getRUBrates());
+        dispatch(exchangeAction.getJPYrates());
+        dispatch(exchangeAction.getAUDrates());
+        dispatch(exchangeAction.getNZDrates());
+        dispatch(exchangeAction.getZARrates());
+        dispatch(exchangeAction.getINRrates());
     }
 });
 
